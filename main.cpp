@@ -4,8 +4,7 @@
 
 int main (void){
     srand(time(NULL));
-    Game game("Burnley","Wigan");
-    while(game.game_active){
-        game.Cycle();
-    }
+    Game game("Burnley",5,"Blackburn",5);
+    game.SimGame();
+    
 }
