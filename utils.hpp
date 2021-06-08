@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 // Utils.hpp
@@ -18,12 +20,53 @@ void PrintTable(vector<Team> &data){
     
     sort(data.begin(),data.end());
     reverse(data.begin(),data.end());
+
+    cout
+        << left
+        << setw(5)
+        << "   "
+        << left
+        << setw(15)
+        << "Team"
+        << right
+        << setw(8)
+        << "Points"
+        << right
+        << setw(8)
+        << "GF"
+        << right
+        << setw(8)
+        << "GA"
+        << right
+        << setw(8)
+        << "GD"
+        << endl;
+
     for(i=0;i<20;i++){
         
         goalsfor = data[i].GetGoalsFor();
         goalsag = data[i].GetGoalsAgainst();
         goalsdiff = goalsfor - goalsag;
-        cout << i << " -> " << data[i].GetName() << " || Pts: " << data[i].GetTotalPoints() << " || GF: " << goalsfor << " || GA: " << goalsag << " || GD: " << goalsdiff << "\n";
+        cout 
+            << left
+            << setw(5)
+            << i
+            << left
+            << setw(15)
+            << data[i].GetName() 
+            << right
+            << setw(8)
+            << data[i].GetTotalPoints() 
+            << right 
+            << setw(8)
+            << goalsfor 
+            << right
+            << setw(8)
+            << goalsag 
+            << right
+            << setw(8) 
+            << goalsdiff 
+            << endl;
     }
 }
 
