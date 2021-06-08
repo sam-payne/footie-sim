@@ -30,7 +30,7 @@ class Game {
         void EndOfGame();
         int time;
         void IncrementTime();
-        void CalculateSkillMod(int home_rank, int away_rank); //Rank out of 10
+        void ApplySkillMod(int home_rank, int away_rank); //Rank out of 10
 
 };
 

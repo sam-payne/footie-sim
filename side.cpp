@@ -1,6 +1,6 @@
 #include "side.hpp"
 using namespace std;
-
+#define COMMENTS 0
 
 Side::Side(){
     baseline_chance = 0.015;
@@ -18,12 +18,16 @@ void Side::VaryChanceOverTime(int t){
 
 int Side::GoalScored(){
     goals++;
-    //cout << "GOAL to " << name << "  ";
+    #if COMMENTS
+    cout << "GOAL to " << name << "  ";
+    #endif
 }
 
 void Side::RedCard(){
     red_cards++;
     //Reduce scoring chance by 0.8
     ModifyBaseline(0.7);
-    //cout << "RED CARD to " << name;
+    #if COMMENTS
+    cout << "RED CARD to " << name;
+    #endif
 }

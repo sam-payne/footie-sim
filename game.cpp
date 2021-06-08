@@ -1,5 +1,5 @@
 #include "game.hpp"
-
+#define COMMENTS 0
 using namespace std;
 
 Game::Game(string home, int homerank, string away, int awayrank){
@@ -14,8 +14,11 @@ Game::Game(string home, int homerank, string away, int awayrank){
 }
 
 int Game :: SimGame(){
-    //cout << "Simulating " << home_team_name << " v " << away_team_name << "\n";
-    CalculateSkillMod(home_rankout10,away_rankout10);
+    #if COMMENTS
+    cout << "Simulating " << home_team_name << " v " << away_team_name << "\n";
+    #endif
+    ApplySkillMod(home_rankout10,away_rankout10); //Using rank differentials
+    home_team.ModifyBaseline(1.2); //Home advantage
     while(game_active){
         Cycle();
     }
@@ -26,9 +29,13 @@ int Game :: Cycle(){
     home_team.VaryChanceOverTime(time);
     away_team.VaryChanceOverTime(time);
 
+    
+    #if COMMENTS
+    if (CalculateGoal())
+        cout << " (" << time << "min)\n";
+    #else
     CalculateGoal();
-   // if (CalculateGoal())
-       // cout << " (" << time << "min)\n";
+    #endif
 
     IncrementTime();
 }
@@ -42,17 +49,17 @@ void Game::IncrementTime(){
 
 void Game::EndOfGame(){
     CalculatePoints();
-    cout << "Final Score: " << home_team.GetName() << " " << home_team.GetGoals() << " ( " << home_team_points << " )" << " || " << away_team.GetName() << " " << away_team.GetGoals() << " ( " << away_team_points << " )"<< "\n";
+    cout << "Final Score: " << home_team.GetName() << " " << home_team.GetGoals()  << " || " << away_team.GetName() << " " << away_team.GetGoals() << "\n";
     game_active = false;
 }
 
-void Game::CalculateSkillMod(int home_rank, int away_rank){
+void Game::ApplySkillMod(int home_rank, int away_rank){
     int diff = home_rank - away_rank; //19 possible
     float mod = 0.1111111 * diff;
-    // Here mod between -1 and 1 depending on rank differential
-    // Transform to between 0.333 and 3 (centrered about 1)
-    // So the worst rank diff punishes by 1/3 scoing chance and the best increases 3x scoring chance
-    // Message -- change back to 0.5 to 2 (8/6/21)
+    // Here mod is between -1 and 1 depending on rank differential
+    // Transform to between 0.5 and 2 (centrered about 1)
+    // So the worst rank diff punishes by 1/2 scoing chance and the best increases 2x scoring chance
+    
     if(mod <= 0){
         mod = mod*0.5 + 1;}
     else{
