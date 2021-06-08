@@ -52,10 +52,11 @@ void Game::CalculateSkillMod(int home_rank, int away_rank){
     // Here mod between -1 and 1 depending on rank differential
     // Transform to between 0.333 and 3 (centrered about 1)
     // So the worst rank diff punishes by 1/3 scoing chance and the best increases 3x scoring chance
+    // Message -- change back to 0.5 to 2 (8/6/21)
     if(mod <= 0){
-        mod = mod*0.666666 + 1;}
+        mod = mod*0.5 + 1;}
     else{
-        mod = 2*mod + 1;
+        mod = mod + 1;
     }
     home_team.ModifyBaseline(mod);
     // Now same for away (inverse diff)
