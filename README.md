@@ -15,5 +15,9 @@ Currently the teams in the Premier League 2020/21 season are held in a vector of
 
 
 ## Usage
+``` 
 > make
+```
+```
 > sim
+```
