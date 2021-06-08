@@ -10,10 +10,13 @@ class Game {
         int SimGame();
         int home_rankout10;
         int away_rankout10;
-    private:
-        void CalculatePoints();
         int GetHomePoints(){return home_team_points;};
         int GetAwayPoint(){return away_team_points;};
+        int GetHomeGoals(){return home_team.GetGoals();};
+        int GetAwayGoals(){return away_team.GetGoals();};
+     
+    private:
+        void CalculatePoints();        
         std::string home_team_name;
         bool CalculateGoal();
         std::string away_team_name;

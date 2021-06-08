@@ -32,12 +32,12 @@ bool Side::CalculateGoal(){
 
 int Side::GoalScored(){
     goals++;
-    cout << "GOAL to " << name << "  ";
+    //cout << "GOAL to " << name << "  ";
 }
 
 void Side::RedCard(){
     red_cards++;
     //Reduce scoring chance by 0.8
     ModifyBaseline(0.7);
-    cout << "RED CARD to " << name;
+    //cout << "RED CARD to " << name;
 }

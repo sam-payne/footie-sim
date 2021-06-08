@@ -14,7 +14,7 @@ Game::Game(string home, int homerank, string away, int awayrank){
 }
 
 int Game :: SimGame(){
-    cout << "Simulating " << home_team_name << " v " << away_team_name << "\n";
+    //cout << "Simulating " << home_team_name << " v " << away_team_name << "\n";
     CalculateSkillMod(home_rankout10,away_rankout10);
     while(game_active){
         Cycle();
@@ -26,8 +26,9 @@ int Game :: Cycle(){
     home_team.VaryChanceOverTime(time);
     away_team.VaryChanceOverTime(time);
 
-    if (CalculateGoal())
-        cout << " (" << time << "min)\n";
+    CalculateGoal();
+   // if (CalculateGoal())
+       // cout << " (" << time << "min)\n";
 
     IncrementTime();
 }
