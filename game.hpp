@@ -1,3 +1,6 @@
+#ifndef __GAME_HPP__
+#define __GAME_HPP__
+
 #include "side.hpp"
 #include <iostream>
 #include <string>
@@ -30,3 +33,5 @@ class Game {
         void CalculateSkillMod(int home_rank, int away_rank); //Rank out of 10
 
 };
+
+#endif

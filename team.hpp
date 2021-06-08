@@ -1,3 +1,6 @@
+#ifndef __TEAM_HPP__
+#define __TEAM_HPP__
+
 #include <string>
 
 class Team {
@@ -19,3 +22,5 @@ class Team {
         int total_goals_for;
         int total_goals_against;
 };
+
+#endif

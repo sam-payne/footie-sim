@@ -15,20 +15,6 @@ void Side::VaryChanceOverTime(int t){
     scoring_chance = a + t*step;
 }
 
-bool Side::CalculateGoal(){
-    
-    float rand_val = (double)rand() / (double)RAND_MAX;
-
-    if(rand_val <= 0.0005556)
-
-     
-    if (rand_val <= scoring_chance){
-        GoalScored();
-        return true;
-    }
-    else
-        return false;
-}
 
 int Side::GoalScored(){
     goals++;

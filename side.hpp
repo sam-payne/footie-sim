@@ -1,3 +1,6 @@
+#ifndef __SIDE_HPP__
+#define __SIDE_HPP__
+
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +16,6 @@ class Side {
         int ChangeName(std::string new_name){name = new_name;};
         int GetGoals(){return goals;};
         int GoalScored();
-        bool CalculateGoal();
         void RedCard();
         void VaryChanceOverTime(int t);
     private:
@@ -24,3 +26,5 @@ class Side {
         int goals;
         std::string name;
 };
+
+#endif
