@@ -4,22 +4,22 @@
 #include <time.h>
 #include <iostream>
 
-class Team {
-    public:
-        
-        Team();
+class Side {    
+    public:        
+        Side();
         float GetChance(){return scoring_chance;};
         int ModifyBaseline(float modifier){baseline_chance = baseline_chance * modifier;};
         std::string GetName(){return name;};
         int ChangeName(std::string new_name){name = new_name;};
         int GetGoals(){return goals;};
-        int GoalScored(){goals++;};
+        int GoalScored();
         bool CalculateGoal();
+        void RedCard();
         void VaryChanceOverTime(int t);
     private:
         float scoring_chance;
         float baseline_chance;
-        int players;
+        int red_cards;
         int player_mood;
         int goals;
         std::string name;

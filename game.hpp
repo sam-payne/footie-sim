@@ -1,4 +1,4 @@
-#include "team.hpp"
+#include "side.hpp"
 #include <iostream>
 #include <string>
 
@@ -11,10 +11,16 @@ class Game {
         int home_rankout10;
         int away_rankout10;
     private:
+        void CalculatePoints();
+        int GetHomePoints(){return home_team_points;};
+        int GetAwayPoint(){return away_team_points;};
         std::string home_team_name;
+        bool CalculateGoal();
         std::string away_team_name;
-        Team home_team;
-        Team away_team;
+        Side home_team;
+        Side away_team;
+        int home_team_points;
+        int away_team_points;
         void EndOfGame();
         int time;
         void IncrementTime();
