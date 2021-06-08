@@ -9,16 +9,20 @@
 #include <algorithm>
 using namespace std;
 
+// Utils.hpp
+
 void PrintTable(vector<Team> &data){
-    vector< pair <int,int> > vect;
-    int i,teamid;
-    for (i=0;i<20;i++){
-        vect.push_back(make_pair(data[i].GetTotalPoints(),i));
-    }
-    sort(vect.begin(),vect.end());
+    
+    int i,teamid,goalsfor,goalsag,goalsdiff;
+    cout << "\n\nLeague Table: \n";
+    
+    sort(data.begin(),data.end());
     for(i=19;i>=0;i--){
-        teamid = vect[i].second;
-        cout << 20-i << " -> " << data[teamid].GetName() << " - Points: " << data[teamid].GetTotalPoints() << " - Goals for: " << data[teamid].GetGoalsFor() << " - Goals against: " << data[teamid].GetGoalsAgainst() << "\n";
+        
+        goalsfor = data[i].GetGoalsFor();
+        goalsag = data[i].GetGoalsAgainst();
+        goalsdiff = goalsfor - goalsag;
+        cout << 20-i << " -> " << data[i].GetName() << " || Pts: " << data[i].GetTotalPoints() << " || GF: " << goalsfor << " || GA: " << goalsag << " || GD: " << goalsdiff << "\n";
     }
 }
 
