@@ -50,7 +50,7 @@ void PrintTable(vector<Team> &data){
         cout 
             << left
             << setw(5)
-            << i
+            << i + 1
             << left
             << setw(15)
             << data[i].GetName() 
