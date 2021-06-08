@@ -14,5 +14,6 @@ Hold info about a team's performance over multiple games (season). Includes tota
 Currently the teams in the Premier League 2020/21 season are held in a vector of Teams. A pregenerated fixture list is used to simulate a total of 380 games. A league table can then be printed.
 
 
-## Compile
-> g++ main.cpp game.cpp side.cpp -o sim
+## Usage
+> make
+> sim
