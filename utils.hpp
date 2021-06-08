@@ -17,12 +17,13 @@ void PrintTable(vector<Team> &data){
     cout << "\n\nLeague Table: \n";
     
     sort(data.begin(),data.end());
-    for(i=19;i>=0;i--){
+    reverse(data.begin(),data.end());
+    for(i=0;i<20;i++){
         
         goalsfor = data[i].GetGoalsFor();
         goalsag = data[i].GetGoalsAgainst();
         goalsdiff = goalsfor - goalsag;
-        cout << 20-i << " -> " << data[i].GetName() << " || Pts: " << data[i].GetTotalPoints() << " || GF: " << goalsfor << " || GA: " << goalsag << " || GD: " << goalsdiff << "\n";
+        cout << i << " -> " << data[i].GetName() << " || Pts: " << data[i].GetTotalPoints() << " || GF: " << goalsfor << " || GA: " << goalsag << " || GD: " << goalsdiff << "\n";
     }
 }
 
