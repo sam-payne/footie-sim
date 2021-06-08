@@ -1,4 +1,7 @@
 #include "game.hpp"
+#include <iostream>
+#include <iomanip>
+
 #define COMMENTS 0
 using namespace std;
 
@@ -49,7 +52,24 @@ void Game::IncrementTime(){
 
 void Game::EndOfGame(){
     CalculatePoints();
-    cout << "Final Score: " << home_team.GetName() << " " << home_team.GetGoals()  << " || " << away_team.GetName() << " " << away_team.GetGoals() << "\n";
+    cout 
+        << "Final Score: " 
+        << left
+        << setw(15)
+        << home_team.GetName() 
+        // << right 
+        << setw(3)
+        << home_team.GetGoals()  
+        << setw(3)
+        << "-" 
+        // << left
+        << setw(3)
+        << away_team.GetGoals() 
+        << left
+        << setw(15)
+        << away_team.GetName() 
+        << endl;
+
     game_active = false;
 }
 
