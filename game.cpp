@@ -2,7 +2,7 @@
 #define COMMENTS 0
 using namespace std;
 
-Game::Game(string home, int homerank, string away, int awayrank){
+Game::Game(string home, int homerank, string away, int awayrank, bool enable_comments){
     game_active = true;
     home_team_name = home;
     away_team_name = away;
@@ -11,12 +11,15 @@ Game::Game(string home, int homerank, string away, int awayrank){
     time = 0;
     home_rankout10 = homerank;
     away_rankout10 = awayrank;
+    comments = enable_comments;
+    home_team.comments = enable_comments;
+    away_team.comments = enable_comments;
 }
 
 int Game :: SimGame(){
-    #if COMMENTS
-    cout << "Simulating " << home_team_name << " v " << away_team_name << "\n";
-    #endif
+    if (comments)
+        cout << "Simulating " << home_team_name << " v " << away_team_name << "\n";
+    
     ApplySkillMod(home_rankout10,away_rankout10); //Using rank differentials
     home_team.ModifyBaseline(1.2); //Home advantage
     while(game_active){
@@ -30,12 +33,13 @@ int Game :: Cycle(){
     away_team.VaryChanceOverTime(time);
 
     
-    #if COMMENTS
-    if (CalculateGoal())
-        cout << " (" << time << "min)\n";
-    #else
-    CalculateGoal();
-    #endif
+    if (comments){
+        if (CalculateGoal())
+            cout << " (" << time << "min)\n";
+    }
+    else
+        CalculateGoal();
+    
 
     IncrementTime();
 }
@@ -49,7 +53,9 @@ void Game::IncrementTime(){
 
 void Game::EndOfGame(){
     CalculatePoints();
-    cout << "Final Score: " << home_team.GetName() << " " << home_team.GetGoals()  << " || " << away_team.GetName() << " " << away_team.GetGoals() << "\n";
+    if(comments)
+        cout << "Final Score: " << home_team.GetName() << " " << home_team.GetGoals()  << " || " << away_team.GetName() << " " << away_team.GetGoals() << "\n";
+    
     game_active = false;
 }
 

@@ -12,15 +12,18 @@
 using namespace std;
 
 // Utils.hpp
+void PrintTable(vector<Team> &data);
+vector<Team> SortTable(vector<Team> data);
+int RunGameOfSeason(Team &home, Team &away);
+int RunSeason(vector<Team> &teams);
+int GetFixtures(int gamenumber,int homeaway);
+int RunGame(Team home,Team away);
 
 void PrintTable(vector<Team> &data){
     
     int i,teamid,goalsfor,goalsag,goalsdiff;
     cout << "\n\nLeague Table: \n";
     
-    sort(data.begin(),data.end());
-    reverse(data.begin(),data.end());
-
     cout
         << left
         << setw(5)
@@ -50,7 +53,7 @@ void PrintTable(vector<Team> &data){
         cout 
             << left
             << setw(5)
-            << i
+            << i+1
             << left
             << setw(15)
             << data[i].GetName() 
@@ -70,8 +73,14 @@ void PrintTable(vector<Team> &data){
     }
 }
 
-int RunGame(Team &home, Team &away){
-    Game game(home.GetName(),home.GetRank(),away.GetName(),away.GetRank());
+vector<Team> SortTable(vector<Team> data){
+    sort(data.begin(),data.end());
+    reverse(data.begin(),data.end());
+    return data;
+}
+
+int RunGameOfSeason(Team &home, Team &away){
+    Game game(home.GetName(),home.GetRank(),away.GetName(),away.GetRank(),false);
     game.SimGame();
     home.AddPoints(game.GetHomePoints());
     away.AddPoints(game.GetAwayPoint());
@@ -80,6 +89,49 @@ int RunGame(Team &home, Team &away){
     away.AddGoalsFor(game.GetAwayGoals());
     away.AddGoalsAgainst(game.GetHomeGoals());
     return 0;
+}
+
+int RunGame(string homename, int homerank, string awayname, int awayrank){
+    Game game(homename,homerank,awayname,awayrank,true);
+    game.SimGame();
+    
+    return 0;
+}
+
+vector<Team> RunSeason(){
+    int gamenumber =0;
+    int homeid,awayid;
+    vector<Team> TeamVector, SortedVector;
+    TeamVector.push_back(Team("Man_C",10));
+    TeamVector.push_back(Team("Man_U",9));
+    TeamVector.push_back(Team("Liverpool",10));
+    TeamVector.push_back(Team("Chelsea",9));
+    TeamVector.push_back(Team("Leicester",8));
+    TeamVector.push_back(Team("West_Ham",3));
+    TeamVector.push_back(Team("Spurs",8));
+    TeamVector.push_back(Team("Arsenal",7));
+    TeamVector.push_back(Team("Leeds",2));
+    TeamVector.push_back(Team("Everton",5));
+    TeamVector.push_back(Team("Aston_Villa",2));
+    TeamVector.push_back(Team("Newcastle",4));
+    TeamVector.push_back(Team("Wolves",7));
+    TeamVector.push_back(Team("Crystal_Palace",4));
+    TeamVector.push_back(Team("Southampton",5));
+    TeamVector.push_back(Team("Brighton",3));
+    TeamVector.push_back(Team("Burnley",6));
+    TeamVector.push_back(Team("Fulham",1));
+    TeamVector.push_back(Team("West_Brom",2));
+    TeamVector.push_back(Team("Sheffield",6));  
+    
+    for (gamenumber=0;gamenumber<380;gamenumber++){
+        homeid = GetFixtures(gamenumber,0);
+        awayid = GetFixtures(gamenumber,1);
+        RunGameOfSeason(TeamVector[homeid],TeamVector[awayid]);
+    }
+
+    SortedVector = SortTable(TeamVector);
+    PrintTable(SortedVector);
+
 }
 
 int GetFixtures(int gamenumber,int homeaway){

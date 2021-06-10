@@ -18,16 +18,16 @@ void Side::VaryChanceOverTime(int t){
 
 int Side::GoalScored(){
     goals++;
-    #if COMMENTS
-    cout << "GOAL to " << name << "  ";
-    #endif
+    if(comments)
+        cout << "GOAL to " << name << "  ";
+    
 }
 
 void Side::RedCard(){
     red_cards++;
     //Reduce scoring chance by 0.8
     ModifyBaseline(0.7);
-    #if COMMENTS
-    cout << "RED CARD to " << name;
-    #endif
+    if(comments)
+        cout << "RED CARD to " << name;
+    
 }

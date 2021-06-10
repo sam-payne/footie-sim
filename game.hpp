@@ -7,7 +7,7 @@
 
 class Game {
     public:         
-        Game(std::string home, int homerank, std::string away, int awayrank);
+        Game(std::string home, int homerank, std::string away, int awayrank,bool enable_comments);
         int Cycle();
         bool game_active;
         int SimGame();
@@ -31,6 +31,7 @@ class Game {
         int time;
         void IncrementTime();
         void ApplySkillMod(int home_rank, int away_rank); //Rank out of 10
+        bool comments;
 
 };
 

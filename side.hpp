@@ -18,6 +18,7 @@ class Side {
         int GoalScored();
         void RedCard();
         void VaryChanceOverTime(int t);
+        bool comments;
     private:
         float scoring_chance;
         float baseline_chance;
@@ -25,6 +26,7 @@ class Side {
         int player_mood;
         int goals;
         std::string name;
+        
 };
 
 #endif

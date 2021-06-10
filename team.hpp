@@ -14,7 +14,7 @@ class Team {
         void AddGoalsFor(int goals_for){total_goals_for += goals_for;};
         void AddGoalsAgainst(int goals_against){total_goals_against += goals_against;};
         int GetRank(){return ranking;};
-
+        // Overload < operator for use in ranking teams
         friend bool operator<(const Team& lhs, const Team& rhs){
             if(lhs.total_points < rhs.total_points){
                 return true;
