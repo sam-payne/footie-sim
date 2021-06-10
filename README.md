@@ -27,3 +27,7 @@ To sim a game between two teams with relative ranks:
 ```
 > sim Burnley 10 Chelsea 6
 ```
+To return the number of seasons simulated before a certain team wins the league:
+```
+> sim howmany Burnley
+```
