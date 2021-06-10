@@ -1,5 +1,5 @@
 # Footie-sim
-Minute-by-minute football simulator for games and entire seasons
+**Minute-by-minute football simulator for games and entire seasons**
 
 ### Game class
 A Game object represents a single match, between two 'Side' objects
@@ -18,6 +18,10 @@ Currently the teams in the Premier League 2020/21 season are held in a vector of
 To compile and link:
 ``` 
 > make
+```
+To display help:
+```
+> sim help
 ```
 To sim a whole season:
 ```
