@@ -15,9 +15,15 @@ Currently the teams in the Premier League 2020/21 season are held in a vector of
 
 
 ## Usage
+To compile and link:
 ``` 
 > make
 ```
+To sim a whole season:
 ```
-> sim
+> sim season
+```
+To sim a game between two teams with relative ranks:
+```
+> sim Burnley 10 Chelsea 6
 ```
