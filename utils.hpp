@@ -19,11 +19,13 @@ int RunSeason(vector<Team> &teams);
 int GetFixtures(int gamenumber,int homeaway);
 int RunGame(Team home,Team away);
 int ShowHelp();
+int RankingsFromFinishingPlace(vector<Team> &sorted,vector<Team> &original);
+void EndOfSeason(vector<Team> &teams);
 
 void PrintTable(vector<Team> &data){
     
     int i,teamid,goalsfor,goalsag,goalsdiff;
-    cout << "\n\nLeague Table: \n";
+    cout << "League Table: \n";
     
     cout
         << left
@@ -44,6 +46,9 @@ void PrintTable(vector<Team> &data){
         << right
         << setw(8)
         << "GD"
+        << right
+        << setw(10)
+        << "Prev Finish"
         << endl;
 
     for(i=0;i<20;i++){
@@ -70,6 +75,9 @@ void PrintTable(vector<Team> &data){
             << right
             << setw(8) 
             << goalsdiff 
+            << right
+            << setw(8) 
+            << data[i].GetFinishingPlace()            
             << endl;
     }
 }
@@ -165,15 +173,48 @@ vector<Team> RunSeason(){
     TeamVector.push_back(Team("Fulham",1));
     TeamVector.push_back(Team("West_Brom",2));
     TeamVector.push_back(Team("Sheffield",6));  
-    
-    for (gamenumber=0;gamenumber<380;gamenumber++){
-        homeid = GetFixtures(gamenumber,0);
-        awayid = GetFixtures(gamenumber,1);
-        RunGameOfSeason(TeamVector[homeid],TeamVector[awayid]);
-    }
 
-    SortedVector = SortTable(TeamVector);
-    PrintTable(SortedVector);
+    int year = 2020;
+    while(1){
+        cout << "\n\n(" << year << "/" << (year+1)%100 << ") Season ";
+        year++;
+        for (gamenumber=0;gamenumber<380;gamenumber++){
+            homeid = GetFixtures(gamenumber,0);
+            awayid = GetFixtures(gamenumber,1);
+            RunGameOfSeason(TeamVector[homeid],TeamVector[awayid]);
+        }
+
+        SortedVector = SortTable(TeamVector);
+        
+        PrintTable(SortedVector);
+
+        RankingsFromFinishingPlace(SortedVector,TeamVector);
+        EndOfSeason(TeamVector);
+        
+        cout << "\nAgain? Hit enter, or CTRL-C to escape\n";
+        getchar();
+    }
+}
+
+void EndOfSeason(vector<Team> &teams){
+    int i;
+    for(i=0;i<teams.size();i++)
+        teams[i].EndOfSeason();
+}
+
+int RankingsFromFinishingPlace(vector<Team> &sorted,vector<Team> &original){
+    int i,j,rank,val;
+    for(i=0;i<20;i++){
+        val = 20-i;
+        rank = val/2 + 1;
+        if(rank>10) rank=10;
+        for(j=0;j<20;j++){
+            if(original[j].GetName() == sorted[i].GetName()){
+                original[j].UpdateFinishingPlace(j+1);
+                original[j].UpdateRanking(rank);
+            }
+        }
+    }
 
 }
 
