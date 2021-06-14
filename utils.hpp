@@ -47,7 +47,7 @@ void PrintTable(vector<Team> &data){
         << setw(8)
         << "GD"
         << right
-        << setw(15)
+        << setw(14)
         << "Prev Finish"
         << endl;
 
