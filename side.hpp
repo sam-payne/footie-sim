@@ -4,12 +4,15 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
+#include "player.hpp"
 #include <time.h>
 #include <iostream>
 
 class Side {    
     public:        
         Side();
+        std::vector <Player> VectorPlayers;
         float GetChance(){return scoring_chance;};
         int ModifyBaseline(float modifier){baseline_chance = baseline_chance * modifier;};
         std::string GetName(){return name;};
@@ -18,6 +21,8 @@ class Side {
         int GoalScored();
         void RedCard();
         void VaryChanceOverTime(int t);
+        void GetPlayers(std::string teamname);
+        Player GetGoalscorer();
         bool comments;
     private:
         float scoring_chance;

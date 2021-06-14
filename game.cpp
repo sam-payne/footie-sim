@@ -11,6 +11,8 @@ Game::Game(string home, int homerank, string away, int awayrank, bool enable_com
     away_team_name = away;
     home_team.ChangeName(home_team_name);
     away_team.ChangeName(away_team_name);
+    home_team.GetPlayers(home_team_name);
+    away_team.GetPlayers(away_team_name);
     time = 0;
     home_rankout10 = homerank;
     away_rankout10 = awayrank;
