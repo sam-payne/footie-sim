@@ -15,4 +15,6 @@ team.o: team.cpp team.hpp
 	@ g++ -c team.cpp
 
 clean: 
-	del /f game.o sim.exe main.o side.o
+	
+	@ cmd /q /c del /q game.o main.o side.o team.o sim.exe
+	
