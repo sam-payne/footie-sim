@@ -3,16 +3,16 @@
 sim: main.o game.o side.o team.o
 	@ g++ main.o game.o side.o team.o -o sim
 
-main.o: main.cpp game.hpp side.hpp utils.hpp team.hpp
-	@ g++ -c main.cpp
+main.o: src/main.cpp src/game.hpp src/side.hpp src/utils.hpp src/team.hpp
+	@ g++ -c src/main.cpp
 
-game.o: game.cpp game.hpp side.hpp
-	@ g++ -c game.cpp
-side.o: side.cpp side.hpp
-	@ g++ -c side.cpp
+game.o: src/game.cpp src/game.hpp src/side.hpp
+	@ g++ -c src/game.cpp
+side.o: src/side.cpp src/side.hpp
+	@ g++ -c src/side.cpp
 
-team.o: team.cpp team.hpp
-	@ g++ -c team.cpp
+team.o: src/team.cpp src/team.hpp
+	@ g++ -c src/team.cpp
 
 clean: 
 	
