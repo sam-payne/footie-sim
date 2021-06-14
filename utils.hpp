@@ -47,7 +47,7 @@ void PrintTable(vector<Team> &data){
         << setw(8)
         << "GD"
         << right
-        << setw(10)
+        << setw(15)
         << "Prev Finish"
         << endl;
 
@@ -101,9 +101,9 @@ int RunGameOfSeason(Team &home, Team &away){
 }
 
 int HowManyToWin(string team){
-    int gamenumber =0, counter=1;
-    int homeid,awayid;
-    vector<Team> TeamVector, SortedVector, NewVector;
+    int gamenumber =0;
+    int homeid,awayid,i;
+    vector<Team> TeamVector, SortedVector;
     TeamVector.push_back(Team("Man_C",10));
     TeamVector.push_back(Team("Man_U",9));
     TeamVector.push_back(Team("Liverpool",10));
@@ -124,28 +124,35 @@ int HowManyToWin(string team){
     TeamVector.push_back(Team("Fulham",1));
     TeamVector.push_back(Team("West_Brom",2));
     TeamVector.push_back(Team("Sheffield",6));  
-    
+
+    int year = 2020;
+    int flag = 0;
     while(1){
-        NewVector = TeamVector;
+        year++;
         for (gamenumber=0;gamenumber<380;gamenumber++){
-            
             homeid = GetFixtures(gamenumber,0);
             awayid = GetFixtures(gamenumber,1);
-            RunGameOfSeason(NewVector[homeid],NewVector[awayid]);
+            RunGameOfSeason(TeamVector[homeid],TeamVector[awayid]);
         }
 
-        SortedVector = SortTable(NewVector);
-        if(SortedVector[0].GetName() == team)
-            break;
-        counter++;
+        SortedVector = SortTable(TeamVector);
+        
+        RankingsFromFinishingPlace(SortedVector,TeamVector);
+        EndOfSeason(TeamVector);
+        
+        for(i=0;i<TeamVector.size();i++){
+            if(TeamVector[i].GetName() == team)
+                if(TeamVector[i].GetFinishingPlace() == 1)
+                    flag = 1;
+        }
+        if(flag) break;
     }
-    cout << "It took " << counter << " number of seasons for " << team << " to win the league.";
+    cout << team << " next win the league in the " << year << "/" << (year+1)%100 << " season";
 }
 
 int RunGame(string homename, int homerank, string awayname, int awayrank){
     Game game(homename,homerank,awayname,awayrank,true);
     game.SimGame();
-    
     return 0;
 }
 
